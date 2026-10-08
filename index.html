@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Skill Finder</title>
+
+
+    <!-- ================================
+         INTERNAL CSS
+    ================================= -->
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #222;
+            min-height: 100vh;
+        }
+
+
+        /* HEADER */
+
+        header {
+            background: #4f46e5;
+            color: white;
+            padding: 20px 8%;
+        }
+
+        header h2 {
+            font-size: 24px;
+        }
+
+
+        /* ALL PAGES */
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+
+        /* HOME */
+
+        .home {
+            min-height: 80vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            padding: 30px;
+        }
+
+        .home-content {
+            max-width: 650px;
+        }
+
+        .home h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .home p {
+            font-size: 19px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+
+        /* CONTAINER */
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+
+        /* PROGRESS */
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+
+            font-size: 14px;
+        }
+
+        .steps span {
+            color: #aaa;
+        }
+
+        .steps .active {
+            color: #4f46e5;
+            font-weight: bold;
+        }
+
+        .steps .completed {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+
+        /* CARD */
+
+        .card {
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .card h1 {
+            margin-bottom: 12px;
+        }
+
+        .card > p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+
+        /* BUTTON */
+
+        .btn {
+            display: inline-block;
+
+            background: #4f46e5;
+
+            color: white;
+
+            border: none;
+
+            padding: 14px 26px;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            margin-top: 25px;
+        }
+
+        .btn:hover {
+            background: #3730a3;
+        }
+
+
+        /* INTERESTS */
+
+        .interest-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .interest {
+            padding: 20px;
+
+            border: 2px solid #eee;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 17px;
+        }
+
+        .interest:hover {
+            border-color: #4f46e5;
+        }
+
+
+        .interest input {
+            margin-right: 10px;
+        }
+
+
+        /* QUESTIONS */
+
+        .question {
+            margin-bottom: 30px;
+
+            padding-bottom: 20px;
+
+            border-bottom:
+                1px solid #eee;
+        }
+
+        .question h3 {
+            margin-bottom: 15px;
+        }
+
+        .question label {
+            display: block;
+
+            margin: 12px 0;
+
+            cursor: pointer;
+        }
+
+        .question input {
+            margin-right: 10px;
+        }
+
+
+        /* ROADMAP */
+
+        .roadmap {
+            margin-top: 25px;
+        }
+
+        .road-step {
+            display: flex;
+
+            gap: 20px;
+
+            padding: 20px;
+
+            margin-bottom: 15px;
+
+            background: #f5f7ff;
+
+            border-radius: 10px;
+        }
+
+
+        .number {
+            min-width: 40px;
+
+            height: 40px;
+
+            background: #4f46e5;
+
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+
+        .road-step h3 {
+            margin-bottom: 7px;
+        }
+
+
+        .road-step p {
+            color: #666;
+
+            line-height: 1.5;
+        }
+
+
+        /* RESULT */
+
+        .result-box {
+            background: #eef2ff;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            padding: 20px;
+
+            color: #777;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .home h1 {
+                font-size: 36px;
+            }
+
+
+            .interest-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .card {
+                padding: 25px;
+            }
+
+
+            .steps {
+                font-size: 11px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<header>
+
+    <h2>Skill Finder</h2>
+
+</header>
+
+
+
+<!-- =====================================
+     HOME PAGE
+===================================== -->
+
+<section id="homePage"
+         class="page active">
+
+    <div class="home">
+
+        <div class="home-content">
+
+            <h1>
+                Discover Your Skills 🚀
+            </h1>
+
+            <p>
+                Find your interests, complete a
+                skill assessment and get a
+                personalized learning roadmap.
+            </p>
+
+            <button
+                class="btn"
+                onclick="startProject()">
+
+                Get Started →
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     INTEREST PAGE
+===================================== -->
+
+<section id="interestPage"
+         class="page">
+
+    <div class="container">
+
+
+        <!-- PROGRESS -->
+
+        <div class="steps">
+
+            <span class="active">
+                1. Interests
+            </span>
+
+            <span>
+                2. Assessment
+            </span>
+
+            <span>
+                3. Roadmap
+            </span>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h1>
+                Tell Us About Your Interests
+            </h1>
+
+            <p>
+                Select the areas you are interested in.
+            </p>
+
+
+            <form
+                onsubmit="submitInterests(event)">
+
+
+                <div class="interest-grid">
+
+
+                    <label class="interest">
+
+                        <input
+                            type="checkbox"
+                            name="interest"
+                            value="Programming">
+
+                        💻 Programming
+
+                    </label>
+
+
+                    <label class="interest">
+
+                        <input
+                            type="checkbox"
+                            name="interest"
+                            value="Web Development">
+
+                        🌐 Web Development
+
+                    </label>
+
+
+                    <label class="interest">
+
+                        <input
+                            type="checkbox"
+                            name="interest"
+                            value="UI/UX Design">
+
+                        🎨 UI/UX Design
+
+                    </label>
+
+
+                    <label class="interest">
+
+                        <input
+                            type="checkbox"
+                            name="interest"
+                            value="Data Science">
+
+                        📊 Data Science
+
+                    </label>
+
+
+                    <label class="interest">
+
+                        <input
+                            type="checkbox"
+                            name="interest"
+                            value="Cyber Security">
+
+                        🔐 Cyber Security
+
+                    </label>
+
+
+                    <label class="interest">
+
+                        <input
+                            type="checkbox"
+                            name="interest"
+                            value="Business">
+
+                        💼 Business
+
+                    </label>
+
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn">
+
+                    Continue to Assessment →
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     ASSESSMENT PAGE
+     
+     IMPORTANT:
+     This section is HIDDEN initially.
+===================================== -->
+
+<section id="assessmentPage"
+         class="page">
+
+    <div class="container">
+
+
+        <div class="steps">
+
+            <span class="completed">
+                ✓ Interests
+            </span>
+
+            <span class="active">
+                2. Assessment
+            </span>
+
+            <span>
+                3. Roadmap
+            </span>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h1>
+                Skill Assessment
+            </h1>
+
+            <p>
+                Answer all questions to find
+                your suitable skill direction.
+            </p>
+
+
+            <form
+                onsubmit="submitAssessment(event)">
+
+
+                <!-- QUESTION 1 -->
+
+                <div class="question">
+
+                    <h3>
+                        1. How comfortable are you
+                        with computers?
+                    </h3>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q1"
+                            value="3"
+                            required>
+
+                        Very Comfortable
+
+                    </label>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q1"
+                            value="2">
+
+                        Comfortable
+
+                    </label>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q1"
+                            value="1">
+
+                        Beginner
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- QUESTION 2 -->
+
+                <div class="question">
+
+                    <h3>
+                        2. Do you enjoy solving problems?
+                    </h3>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q2"
+                            value="3"
+                            required>
+
+                        Yes, a lot
+
+                    </label>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q2"
+                            value="2">
+
+                        Sometimes
+
+                    </label>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q2"
+                            value="1">
+
+                        Not much
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- QUESTION 3 -->
+
+                <div class="question">
+
+                    <h3>
+                        3. Which activity do you prefer?
+                    </h3>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q3"
+                            value="3"
+                            required>
+
+                        Creating websites and applications
+
+                    </label>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q3"
+                            value="2">
+
+                        Designing interfaces
+
+                    </label>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q3"
+                            value="1">
+
+                        Managing projects
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- QUESTION 4 -->
+
+                <div class="question">
+
+                    <h3>
+                        4. What do you enjoy most?
+                    </h3>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q4"
+                            value="3"
+                            required>
+
+                        Coding
+
+                    </label>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q4"
+                            value="2">
+
+                        Creativity
+
+                    </label>
+
+
+                    <label>
+
+                        <input
+                            type="radio"
+                            name="q4"
+                            value="1">
+
+                        Communication
+
+                    </label>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="btn">
+
+                    See My Roadmap →
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     ROADMAP PAGE
+
+     IMPORTANT:
+     This section is HIDDEN initially.
+===================================== -->
+
+<section id="roadmapPage"
+         class="page">
+
+    <div class="container">
+
+
+        <div class="steps">
+
+            <span class="completed">
+                ✓ Interests
+            </span>
+
+            <span class="completed">
+                ✓ Assessment
+            </span>
+
+            <span class="active">
+                3. Roadmap
+            </span>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h1>
+                Your Personalized Roadmap 🚀
+            </h1>
+
+
+            <div class="result-box">
+
+                <p id="interestResult">
+
+                    Your roadmap is based on
+                    your selected interests.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="roadmap">
+
+
+                <!-- STEP 1 -->
+
+                <div class="road-step">
+
+                    <div class="number">
+                        1
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Learn the Basics
+                        </h3>
+
+                        <p>
+                            Learn the fundamental concepts
+                            related to your selected skill.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STEP 2 -->
+
+                <div class="road-step">
+
+                    <div class="number">
+                        2
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Practice
+                        </h3>
+
+                        <p>
+                            Practice regularly through
+                            exercises and small tasks.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STEP 3 -->
+
+                <div class="road-step">
+
+                    <div class="number">
+                        3
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Build Projects
+                        </h3>
+
+                        <p>
+                            Create practical projects
+                            to improve your skills.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STEP 4 -->
+
+                <div class="road-step">
+
+                    <div class="number">
+                        4
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Advanced Learning
+                        </h3>
+
+                        <p>
+                            Learn advanced concepts and
+                            technologies in your field.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STEP 5 -->
+
+                <div class="road-step">
+
+                    <div class="number">
+                        5
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Career Preparation
+                        </h3>
+
+                        <p>
+                            Prepare your portfolio,
+                            resume and career applications.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <button
+                class="btn"
+                onclick="restartProject()">
+
+                Start Again
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<footer>
+
+    © 2026 Skill Finder
+
+</footer>
+
+
+
+<!-- =====================================
+     INTERNAL JAVASCRIPT
+===================================== -->
+
+<script>
+
+
+/*
+================================================
+PAGE CONTROL
+================================================
+
+Only ONE section is visible at a time.
+
+The user never gets a button/link to directly
+open Assessment or Roadmap.
+================================================
+*/
+
+
+function showPage(pageID) {
+
+
+    // Hide every page
+
+    document.querySelectorAll(".page")
+        .forEach(function(page) {
+
+            page.classList.remove("active");
+
+        });
+
+
+    // Show requested page
+
+    document.getElementById(pageID)
+        .classList.add("active");
+
+
+    // Scroll to top
+
+    window.scrollTo(0, 0);
+
+}
+
+
+
+/*
+================================================
+START PROJECT
+================================================
+*/
+
+function startProject() {
+
+
+    // Clear old data
+
+    localStorage.clear();
+
+
+    // Open ONLY Interests
+
+    showPage("interestPage");
+
+}
+
+
+
+/*
+================================================
+SUBMIT INTERESTS
+================================================
+*/
+
+function submitInterests(event) {
+
+
+    // Stop normal form submission
+
+    event.preventDefault();
+
+
+    // Find selected interests
+
+    const selected =
+        document.querySelectorAll(
+            'input[name="interest"]:checked'
+        );
+
+
+    // Check selection
+
+    if (selected.length === 0) {
+
+        alert(
+            "Please select at least one interest."
+        );
+
+        return;
+
+    }
+
+
+    // Create array
+
+    let interests = [];
+
+
+    selected.forEach(function(item) {
+
+        interests.push(item.value);
+
+    });
+
+
+    /*
+    Save the interests.
+
+    This also proves that the first
+    step has been completed.
+    */
+
+    localStorage.setItem(
+        "interestsCompleted",
+        "true"
+    );
+
+
+    localStorage.setItem(
+        "selectedInterests",
+        JSON.stringify(interests)
+    );
+
+
+    /*
+    NOW and ONLY NOW:
+    Show Assessment.
+    */
+
+    showPage("assessmentPage");
+
+}
+
+
+
+/*
+================================================
+SUBMIT ASSESSMENT
+================================================
+*/
+
+function submitAssessment(event) {
+
+
+    event.preventDefault();
+
+
+    /*
+    Check that interests were completed.
+    */
+
+    if (
+        localStorage.getItem(
+            "interestsCompleted"
+        ) !== "true"
+    ) {
+
+        alert(
+            "Please complete your interests first."
+        );
+
+        showPage("interestPage");
+
+        return;
+
+    }
+
+
+    /*
+    Check every question.
+    */
+
+    const questions = [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+    ];
+
+
+    for (
+        let question of questions
+    ) {
+
+
+        const answer =
+            document.querySelector(
+                'input[name="' +
+                question +
+                '"]:checked'
+            );
+
+
+        if (!answer) {
+
+            alert(
+                "Please answer all questions."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+
+    /*
+    Calculate score.
+    */
+
+    let score = 0;
+
+
+    questions.forEach(
+        function(question) {
+
+
+            const answer =
+                document.querySelector(
+                    'input[name="' +
+                    question +
+                    '"]:checked'
+                );
+
+
+            score +=
+                Number(answer.value);
+
+        }
+    );
+
+
+    /*
+    Save assessment.
+    */
+
+    localStorage.setItem(
+        "assessmentCompleted",
+        "true"
+    );
+
+
+    localStorage.setItem(
+        "assessmentScore",
+        score
+    );
+
+
+    /*
+    NOW and ONLY NOW:
+    Show Roadmap.
+    */
+
+    displayRoadmap();
+
+}
+
+
+
+/*
+================================================
+DISPLAY ROADMAP
+================================================
+*/
+
+function displayRoadmap() {
+
+
+    /*
+    Double check both steps.
+    */
+
+    const interestsCompleted =
+        localStorage.getItem(
+            "interestsCompleted"
+        );
+
+
+    const assessmentCompleted =
+        localStorage.getItem(
+            "assessmentCompleted"
+        );
+
+
+    if (
+        interestsCompleted !== "true"
+    ) {
+
+        showPage("interestPage");
+
+        return;
+
+    }
+
+
+    if (
+        assessmentCompleted !== "true"
+    ) {
+
+        showPage("assessmentPage");
+
+        return;
+
+    }
+
+
+    /*
+    Get interests.
+    */
+
+    const saved =
+        localStorage.getItem(
+            "selectedInterests"
+        );
+
+
+    if (saved) {
+
+
+        const interests =
+            JSON.parse(saved);
+
+
+        document.getElementById(
+            "interestResult"
+        ).innerHTML =
+
+            "Your selected interests are: " +
+
+            "<strong>" +
+
+            interests.join(", ") +
+
+            "</strong>.<br><br>" +
+
+            "Based on your interests and " +
+
+            "assessment, follow the roadmap below.";
+
+    }
+
+
+    /*
+    Finally show Roadmap.
+    */
+
+    showPage("roadmapPage");
+
+}
+
+
+
+/*
+================================================
+RESTART
+================================================
+*/
+
+function restartProject() {
+
+
+    // Delete saved progress
+
+    localStorage.clear();
+
+
+    // Return to Home
+
+    showPage("homePage");
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
